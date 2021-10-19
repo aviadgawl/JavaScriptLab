@@ -1,0 +1,30 @@
+body{
+    font-size: 21px;
+}
+
+button{
+    width: 200px;
+    height: 200px;
+    font-size: 21px;
+}
+
+.log{
+    width: 250px;
+    height: 800px;
+}
+
+div{
+    padding: 2px;
+    border: 1px solid black;
+    margin-top:5px;
+}
+
+td{
+    border: 1px solid black;
+    font-size: 25px;
+    padding:5px;
+}
+
+.bold{
+    font-weight: bold;
+}
