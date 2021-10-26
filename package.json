@@ -1,0 +1,23 @@
+{
+  "name": "aviadlab",
+  "version": "1.0.0",
+  "description": "Simple JavaScript examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aviadgawl/AviadsLab.git"
+  },
+  "author": "aviad shua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aviadgawl/AviadsLab/issues"
+  },
+  "homepage": "https://github.com/aviadgawl/AviadsLab#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
