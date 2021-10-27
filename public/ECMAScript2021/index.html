@@ -14,10 +14,11 @@
         <h2>String.protype.replaceAll</h2>
         <div>const beforeString = "aaaddddcccaaaa";</div>
         <div>const afterString = beforeString.replaceAll('a','1');</div>
+        <div>result: "<span id="replaceAll"></span>"</div>
     </div>
     <div>
         <h2>Logical assignment operator</h2>
-        <h3>&&=</h3>
+        <h3>x &&= y</h3>
         <table>
             <tr>
                 <td>x</td>
@@ -29,7 +30,7 @@
                 <td>false</td>
                 <td>false</td>
                 <td id="x1And"></td>
-                <td>successful</td>
+                <td>failed</td>
             </tr>
             <tr>
                 <td>false</td>
@@ -50,7 +51,7 @@
                 <td>successful</td>
             </tr>
         </table>
-        <h3>||=</h3>
+        <h3>x ||= y</h3>
         <table>
             <tr>
                 <td>x</td>
@@ -83,7 +84,39 @@
                 <td>successful</td>
             </tr>
         </table>
-        <h3>??=</h3>
+        <h3>x ??= y</h3>
+        <table>
+            <tr>
+                <td>x</td>
+                <td>y</td>
+                <td>result</td>
+                <td>assignment</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>"Goo"</td>
+                <td>"<span id="x1Null"></span>"</td>
+                <td>failed</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>"Goo"</td>
+                <td>"<span id="x2Null"></span>"</td>
+                <td>successful</td>
+            </tr>
+            <tr>
+                <td>undifiend</td>
+                <td>"Goo"</td>
+                <td>"<span id="x3Null"></span>"</td>
+                <td>successful</td>
+            </tr>
+            <tr>
+                <td>Foo</td>
+                <td>"Goo"</td>
+                <td>"<span id="x4Null"></span>"</td>
+                <td>failed</td>
+            </tr>
+        </table>
     </div>
     <script>
         // Numberic separators
@@ -92,6 +125,7 @@
         // String.protype.replaceAll
         const beforeString = 'aaaddddcccaaaa';
         const afterString = beforeString.replaceAll('a', '1');
+        document.getElementById('replaceAll').innerText = afterString;
 
         // Logical assignment operators
         // And & Equals (&&=)
@@ -115,7 +149,7 @@
         x4And &&= y4And;
         document.getElementById('x4And').innerText = x4And;
 
-        // And & Equals (&&=)
+        // Or & Equals (&&=)
         let x1Or = false;
         let y1Or = false;
         x1Or ||= y1Or;
@@ -135,6 +169,27 @@
         let y4Or = true;
         x4Or ||= y4Or;
         document.getElementById('x4Or').innerText = x4Or;
+
+        // Nullish Coalescing & Equals (??=)
+        let x1Null = false;
+        let y1Null = 'Goo';
+        x1Null ??= y1Null;
+        document.getElementById('x1Null').innerText = x1Null;
+
+        let x2Null = null;
+        let y2Null = 'Goo';
+        x2Null ??= y2Null;
+        document.getElementById('x2Null').innerText = x2Null;
+
+        let x3Null = undefined;
+        let y3Null = 'Goo';
+        x3Null ??= y3Null;
+        document.getElementById('x3Null').innerText = x3Null;
+
+        let x4Null = 'Foo';
+        let y4Null = 'Goo';
+        x4Null ??= y4Null;
+        document.getElementById('x4Null').innerText = x4Null;
     </script>
 </body>
 
