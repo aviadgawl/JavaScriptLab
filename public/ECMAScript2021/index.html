@@ -17,6 +17,15 @@
         <div>result: "<span id="replaceAll"></span>"</div>
     </div>
     <div>
+        <h2>Promise.any method</h2>
+        <p>The Promise.any() method returns a promise that will resolve as soon as one of the promises is resolved.</p>
+        </p>If all of the promises are rejected, the method will throw an AggregateError exception holding the rejection
+        reason</p>
+        <button onclick="anyExample1()">All promises are rejected</button>
+        <button onclick="anyExample2()">Second promise resolved</button>
+        <div>Result: <span id="anyResult"></span></div>
+    </div>
+    <div>
         <h2>Logical assignment operator</h2>
         <h3>x &&= y</h3>
         <table>
@@ -126,6 +135,58 @@
         const beforeString = 'aaaddddcccaaaa';
         const afterString = beforeString.replaceAll('a', '1');
         document.getElementById('replaceAll').innerText = afterString;
+
+        // Promise Any.
+        const anyExample1 = async () => {
+            const firstPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 1000);
+            });
+
+            const secondPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 2000);
+            });
+
+            const thirdPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 3000);
+            });
+
+            try {
+                const firstToRelove = await Promise.any([
+                    firstPromise, secondPromise, thirdPromise
+                ]);
+                console.log(firstToResolve);
+            } catch (error) {
+                // AggregateError: All promises were rejected
+                document.getElementById('anyResult').innerText = error;
+                console.log(error);
+
+            }
+        }
+
+        const anyExample2 = async () => {
+            const firstPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 1000);
+            });
+
+            const secondPromise = new Promise((resolve, reject) => {
+                setTimeout(() => resolve('secondPromise'), 2000);
+            });
+
+            const thirdPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 3000);
+            });
+
+            try {
+                // Any of the promises was fulfilled.
+                const firstToResolve = await Promise.any([
+                    firstPromise, secondPromise, thirdPromise
+                ]);
+                document.getElementById('anyResult').innerText = firstToResolve;
+                console.log(firstToResolve);
+            } catch (error) {
+                console.log(error);
+            }
+        }
 
         // Logical assignment operators
         // And & Equals (&&=)
