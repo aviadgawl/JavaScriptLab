@@ -173,7 +173,7 @@
             });
 
             const thirdPromise = new Promise((resolve, reject) => {
-                setTimeout(() => reject(), 3000);
+                setTimeout(() => resolve('thirdPromise'), 3000);
             });
 
             try {
