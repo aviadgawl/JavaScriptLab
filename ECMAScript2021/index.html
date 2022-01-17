@@ -1,0 +1,257 @@
+<html>
+
+<head>
+    <title>ECMAScript 2021</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div>
+        <h2>Numberic separators</h2>
+        <span>const million = 1_000_000 </span>
+    </div>
+    <div>
+        <h2>String.protype.replaceAll</h2>
+        <div>const beforeString = "aaaddddcccaaaa";</div>
+        <div>const afterString = beforeString.replaceAll('a','1');</div>
+        <div>result: "<span id="replaceAll"></span>"</div>
+    </div>
+    <div>
+        <h2>Promise.any method</h2>
+        <p>The Promise.any() method returns a promise that will resolve as soon as one of the promises is resolved.</p>
+        </p>If all of the promises are rejected, the method will throw an AggregateError exception holding the rejection
+        reason</p>
+        <button onclick="anyExample1()">All promises are rejected</button>
+        <button onclick="anyExample2()">Second promise resolved</button>
+        <div>Result: <span id="anyResult"></span></div>
+    </div>
+    <div>
+        <h2>Logical assignment operator</h2>
+        <h3>x &&= y</h3>
+        <table>
+            <tr>
+                <td>x</td>
+                <td>y</td>
+                <td>result</td>
+                <td>assignment</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>false</td>
+                <td id="x1And"></td>
+                <td>failed</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>true</td>
+                <td id="x2And"></td>
+                <td>failed</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>false</td>
+                <td id="x3And"></td>
+                <td>faield</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>true</td>
+                <td id="x4And"></td>
+                <td>successful</td>
+            </tr>
+        </table>
+        <h3>x ||= y</h3>
+        <table>
+            <tr>
+                <td>x</td>
+                <td>y</td>
+                <td>result</td>
+                <td>assignment</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>false</td>
+                <td id="x1Or"></td>
+                <td>failed</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>true</td>
+                <td id="x2Or"></td>
+                <td>successful</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>false</td>
+                <td id="x3Or"></td>
+                <td>successful</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>true</td>
+                <td id="x4Or"></td>
+                <td>successful</td>
+            </tr>
+        </table>
+        <h3>x ??= y</h3>
+        <table>
+            <tr>
+                <td>x</td>
+                <td>y</td>
+                <td>result</td>
+                <td>assignment</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>"Goo"</td>
+                <td>"<span id="x1Null"></span>"</td>
+                <td>failed</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>"Goo"</td>
+                <td>"<span id="x2Null"></span>"</td>
+                <td>successful</td>
+            </tr>
+            <tr>
+                <td>undifiend</td>
+                <td>"Goo"</td>
+                <td>"<span id="x3Null"></span>"</td>
+                <td>successful</td>
+            </tr>
+            <tr>
+                <td>Foo</td>
+                <td>"Goo"</td>
+                <td>"<span id="x4Null"></span>"</td>
+                <td>failed</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        // Numberic separators
+        const million = 1_000_000;
+
+        // String.protype.replaceAll
+        const beforeString = 'aaaddddcccaaaa';
+        const afterString = beforeString.replaceAll('a', '1');
+        document.getElementById('replaceAll').innerText = afterString;
+
+        // Promise Any.
+        const anyExample1 = async () => {
+            const firstPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 1000);
+            });
+
+            const secondPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 2000);
+            });
+
+            const thirdPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 3000);
+            });
+
+            try {
+                const firstToRelove = await Promise.any([
+                    firstPromise, secondPromise, thirdPromise
+                ]);
+                console.log(firstToResolve);
+            } catch (error) {
+                // AggregateError: All promises were rejected
+                document.getElementById('anyResult').innerText = error;
+                console.log(error);
+
+            }
+        }
+
+        const anyExample2 = async () => {
+            const firstPromise = new Promise((resolve, reject) => {
+                setTimeout(() => reject(), 1000);
+            });
+
+            const secondPromise = new Promise((resolve, reject) => {
+                setTimeout(() => resolve('secondPromise'), 2000);
+            });
+
+            const thirdPromise = new Promise((resolve, reject) => {
+                setTimeout(() => resolve('thirdPromise'), 3000);
+            });
+
+            try {
+                // Any of the promises was fulfilled.
+                const firstToResolve = await Promise.any([
+                    firstPromise, secondPromise, thirdPromise
+                ]);
+                document.getElementById('anyResult').innerText = firstToResolve;
+                console.log(firstToResolve);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        // Logical assignment operators
+        // And & Equals (&&=)
+        let x1And = false;
+        let y1And = false;
+        x1And &&= y1And;
+        document.getElementById('x1And').innerText = x1And;
+
+        let x2And = false;
+        let y2And = true;
+        x2And &&= y2And;
+        document.getElementById('x2And').innerText = x2And;
+
+        let x3And = true;
+        let y3And = false;
+        x3And &&= y3And;
+        document.getElementById('x3And').innerText = x3And;
+
+        let x4And = true;
+        let y4And = true;
+        x4And &&= y4And;
+        document.getElementById('x4And').innerText = x4And;
+
+        // Or & Equals (&&=)
+        let x1Or = false;
+        let y1Or = false;
+        x1Or ||= y1Or;
+        document.getElementById('x1Or').innerText = x1Or;
+
+        let x2Or = false;
+        let y2Or = true;
+        x2Or ||= y2Or;
+        document.getElementById('x2Or').innerText = x2Or;
+
+        let x3Or = true;
+        let y3Or = false;
+        x3Or ||= y3Or;
+        document.getElementById('x3Or').innerText = x3Or;
+
+        let x4Or = true;
+        let y4Or = true;
+        x4Or ||= y4Or;
+        document.getElementById('x4Or').innerText = x4Or;
+
+        // Nullish Coalescing & Equals (??=)
+        let x1Null = false;
+        let y1Null = 'Goo';
+        x1Null ??= y1Null;
+        document.getElementById('x1Null').innerText = x1Null;
+
+        let x2Null = null;
+        let y2Null = 'Goo';
+        x2Null ??= y2Null;
+        document.getElementById('x2Null').innerText = x2Null;
+
+        let x3Null = undefined;
+        let y3Null = 'Goo';
+        x3Null ??= y3Null;
+        document.getElementById('x3Null').innerText = x3Null;
+
+        let x4Null = 'Foo';
+        let y4Null = 'Goo';
+        x4Null ??= y4Null;
+        document.getElementById('x4Null').innerText = x4Null;
+    </script>
+</body>
+
+</html>

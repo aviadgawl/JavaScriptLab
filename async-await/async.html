@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>Asynchronous Code</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <h1> Asynchronous Code </h1>
+    <button onclick="doWork()">Do 3 Seconds Work!</button>
+    <button onclick="doWorkAsync()">Do 3 Seconds Work Async!</button>
+    <button onclick="otherWork()">Do Some Other Work!</button>
+    <div class="log" id="log"></div>
+    <script>
+        let workCounter = 1;
+
+        const doWork = () => {
+            let currentCount = workCounter;
+            workCounter += 1;
+            write(`doWork ${currentCount} Started`);
+
+            workWithPromise(3)
+                .then((result) => {
+                    write(`doWork ${currentCount} Finished`);
+                }).catch((error) => {
+                    write('error');
+                });
+        }
+
+        const doWorkAsync = async () => {
+            try {
+                let currentCount = workCounter;
+                workCounter += 1;
+                write(`doWorkAsync ${currentCount} Started`);
+
+                let result = await workWithPromise(3);
+                write(`doWorkAsync ${currentCount} Finished`);
+            } catch (error) {
+                write('error');
+            }
+        }
+
+        const otherWork = () => {
+            write('other Work');
+        }
+
+    </script>
+</body>
+
+</html>

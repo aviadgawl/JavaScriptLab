@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>Synchronous Code</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <h1> Synchronous Code </h1>
+    <button onclick="doWork()">Do 3 Seconds Work!</button>
+    <button onclick="otherWork()">Do Some Other Work!</button>
+    <div class="log" id="log"></div>
+    <script>
+        let workCounter = 1;
+
+        const doWork = () => {
+            write(`doWork ${workCounter} Started`);
+            workCounter = workCounter++;
+
+            work(3);
+            write(`doWork ${workCounter} Finished`);
+        }
+
+        const otherWork = () => {
+            write('otherWork');
+        }
+
+    </script>
+</body>
+
+</html>
