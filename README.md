@@ -1,6 +1,6 @@
 # AviadsLab
 
-This project is a banch of simple examples for new features in the JavaScript language.
+This project is a bunch of simple examples for new features in the JavaScript language.
 
 ## Getting Started
 
